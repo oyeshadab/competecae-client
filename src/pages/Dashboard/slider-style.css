@@ -1,0 +1,27 @@
+.horizontal-slider-input {
+  @apply w-full -translate-y-[1px];
+}
+
+.horizontal-slider-thumb-input {
+  cursor: pointer;
+  z-index: 1;
+  background: #ffcc66;
+  border: 1px solid rgba(7, 7, 7, 0.1);
+  border-radius: 54px;
+}
+
+.horizontal-slider-track-input {
+  background-color: #fff2d7;
+}
+
+.horizontal-slider-input .horizontal-slider-track-input {
+  height: 11px;
+  border-radius: 80px;
+  top: 7px;
+}
+
+.horizontal-slider-input .horizontal-slider-thumb-input {
+  width: 36px;
+  outline: none;
+  height: 25px;
+}

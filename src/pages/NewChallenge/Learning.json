@@ -1,0 +1,18 @@
+{
+  "title": "Learning",
+  "unselect": {
+    "width": 91,
+    "height": 90
+  },
+  "select": {
+    "width": 108,
+    "height": 106
+  },
+  "items": [
+    {
+      "id": 0,
+      "name": "Books",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    }
+  ]
+}

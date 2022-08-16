@@ -1,0 +1,28 @@
+{
+  "title": "Select Types",
+  "items": [
+    {
+      "id": 0,
+      "describe": "You vs You",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 1,
+
+      "describe": "Me vs You",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 2,
+
+      "describe": "Us vs Them",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 3,
+
+      "describe": "All 4 one",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    }
+  ]
+}

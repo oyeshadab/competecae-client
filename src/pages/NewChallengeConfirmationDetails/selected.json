@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": 6345,
+      "name": "Type 34",
+      "describe": "Lorem ipsum dolor sit amet,",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 457,
+      "name": "Type 64",
+      "describe": "Lorem ipsum dolor sit amet,",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 978,
+      "name": "Type 45",
+      "describe": "Lorem ipsum dolor sit amet,",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Finance",
+  "unselect": {
+    "width": 91,
+    "height": 90
+  },
+  "select": {
+    "width": 108,
+    "height": 106
+  },
+  "items": [
+    {
+      "id": 0,
+      "name": "Financial Habits",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 1,
+      "name": "Debt",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 3,
+      "name": "Charity",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 4,
+      "name": "Stocks",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    }
+  ]
+}

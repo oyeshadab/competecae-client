@@ -1,0 +1,33 @@
+{
+  "title": "Select Category",
+  "unselect": {
+    "width": 91,
+    "height": 90
+  },
+  "select": {
+    "width": 108,
+    "height": 106
+  },
+  "items": [
+    {
+      "id": 0,
+      "name": "Fitness",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 1,
+      "name": "Finance",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 2,
+      "name": "Habits",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    },
+    {
+      "id": 3,
+      "name": "Learning",
+      "thumb": ["/images/Group 148.svg", "/images/Group 149.svg"]
+    }
+  ]
+}
