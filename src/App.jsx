@@ -7,7 +7,7 @@ import { RequireAuth, AuthProvider } from "react-auth-kit";
 import ConfirmEmail from "./pages/ConfirmEmail/ConfirmEmail";
 import Home from "./pages/Home/Home";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-import ReportCheaters from './pages/ReportCheaters'
+import ReportCheaters from "./pages/ReportCheaters";
 import NewChallenge from "./pages/NewChallenge/NewChallenge.tsx";
 import ConfirmDetails from "./pages/NewChallengeConfirmationDetails/ConfirmDetails.tsx";
 import Competition from "./pages/Competition/Competition";
@@ -25,6 +25,7 @@ import SideBar from "./components/Side-bar-fixed/Side-bar-fixed";
 import Carousel from "./components/caraousel-react/carousel-books";
 import Navbar from "./components/global/navbar/Navbar.tsx";
 import Dashboard from "./pages/Dashboard/Dashboard.tsx";
+import Reports from "./pages/Reports/Reports";
 // import "./style/main.css";
 
 function App() {
@@ -554,6 +555,14 @@ function App() {
               element={
                 <RequireAuth loginPath={"/login"}>
                   <Admin categories={categories} types={types} />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/admin/reports"
+              element={
+                <RequireAuth loginPath={"/login"}>
+                  <Reports />
                 </RequireAuth>
               }
             ></Route>

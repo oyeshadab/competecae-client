@@ -1,6 +1,6 @@
 import "./Admin.scss";
 import PageContent from "../../components/PageContent/PageContent";
-import Sidebar from "../../components/Sidebar/Sidebar";
+// import Sidebar from "../../components/Sidebar/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
@@ -59,6 +59,9 @@ const Admin = ({ categories, types }) => {
           <p className="admin-page__intro-welcome">
             Need to make some changes?
           </p>
+          <button
+          onClick={() => navigate("/admin/reports")}
+           className="admin-page__intro-button">Go to Reports page</button>
         </div>
         <div className="admin-page__content">
           <div className="admin-page__top">
