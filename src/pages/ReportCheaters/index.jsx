@@ -26,17 +26,12 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     getUser();
-    getCompetitions();
+    getCompetitions("?user=");
   }, []);
 
   const getUser = () => {
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/users`
-        // , {
-        //   verification_code: e.target.code.value,
-        // }
-      )
+      .get(`${process.env.REACT_APP_API_URL}/users`)
       .then((res) => {
         var newRes = res.data.map((item, index) => {
           item.label = item.user_name;
@@ -45,29 +40,14 @@ const ForgotPassword = () => {
         });
         setUsers(newRes);
       })
-      .catch((err) => {
-        // switch(err.response.status) {
-        // case 403:
-        //     toast.error("Confirmation code not found!");
-        //     break;
-        // case 406:
-        //     toast.error("Something went wrong :(")
-        //     break;
-        // default:
-        //     break;
-        // }
-      });
+      .catch((err) => {});
   };
 
-  const getCompetitions = () => {
+  const getCompetitions = (data) => {
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/challenges/latest`
-        // , {
-        //   verification_code: e.target.code.value,
-        // }
-      )
+      .get(`${process.env.REACT_APP_API_URL}/challenges/latest` + data)
       .then((res) => {
+        // console.log("🚀 ~ file: index.jsx ~ line 56 ~ .then ~ res", res.data)
         var newRes = res.data.map((item, index) => {
           item.label = item.name;
           item.value = index;
@@ -75,31 +55,14 @@ const ForgotPassword = () => {
         });
         setSubCategoryOptions(newRes);
       })
-      .catch((err) => {
-        // switch(err.response.status) {
-        // case 403:
-        //     toast.error("Confirmation code not found!");
-        //     break;
-        // case 406:
-        //     toast.error("Something went wrong :(")
-        //     break;
-        // default:
-        //     break;
-        // }
-      });
+      .catch((err) => {});
   };
 
   const uploadFile = (e) => {
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 88 ~ uploadFile ~ e",
-      e.target.files[0].name
-    );
     setLoading(true);
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
     formData.append("fileName", e.target.files[0].name);
-    // console.log("🚀 ~ file: index.jsx ~ line 94 ~ uploadFile ~ formData", formData)
-    // return
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -108,16 +71,11 @@ const ForgotPassword = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/upload`, formData)
       .then((response) => {
-        // console.log(
-        //   "🚀 ~ file: index.jsx ~ line 99 ~ ).then ~ response",
-        //   response
-        // );
         setUploadedFile(response.data);
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
-        console.log("🚀 ~ file: index.jsx ~ line 101 ~ ).then ~ err", err);
       });
   };
 
@@ -131,52 +89,33 @@ const ForgotPassword = () => {
     } else if (!ChallengeId) {
       alert("Please select a challenge.");
     } else {
-
       axios({
-        method: 'post',
+        method: "post",
         url: `${process.env.REACT_APP_API_URL}/api/v1/reports`,
-        headers: {}, 
-        data:{
+        headers: {},
+        data: {
           challengeId: userId,
           userId: ChallengeId,
           description: description,
-          proof:uploadedFile.url
-        }
-      }).then((response)=>{
-        alert('Report submitted.')
-      // console.log("🚀 ~ file: index.jsx ~ line 146 ~ submit ~ response", response.data)
-        
-      })
-      // axios
-      //   .post(`${process.env.REACT_APP_API_URL}/api/v1/reports`, {
-      //     challengeId: userId,
-      //     userId: ChallengeId,
-      //     description: description,
-      //     proof:uploadedFile.url
-      //   })
-      //   .then((response) => {
-      //     console.log("🚀 ~ file: index.jsx ~ line 142 ~ .then ~ response", response)
-      //     // console.log(
-      //     //   "🚀 ~ file: index.jsx ~ line 99 ~ ).then ~ response",
-      //     //   response
-      //     // );
-      //     // setUploadedFile(response.data);
-      //     // setLoading(false);
-      //   })
-      //   .catch((err) => {
-      //     // setLoading(false);
-      //     console.log("🚀 ~ file: index.jsx ~ line 101 ~ ).then ~ err", err);
-      //   });
+          proof: uploadedFile.url,
+        },
+      }).then((response) => {
+        alert("Report submitted.");
+      });
     }
   };
 
   const handleClick = (event) => {
-    // console.log(
-    //   "🚀 ~ file: index.jsx ~ line 44 ~ ForgotPassword ~ event",
-    //   hiddenFileInput
-    // );
     hiddenFileInput.current.click();
   };
+
+  const updateUser = (userId) => {
+
+    setUserId(userId);
+    getCompetitions("?user=" + userId);
+  };
+
+  var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <>
@@ -206,13 +145,6 @@ const ForgotPassword = () => {
                 class="col-md-8"
                 style={{ alignItems: "center", marginLeft: 10 }}
               >
-                {/* <Oval
-    height = {30}
-    width = {30}
-    // radius = "9"
-    color = '#DAB876'  
-  /> */}
-
                 <div class="row">
                   <div class="col-md-6">
                     <form onSubmit={() => {}}>
@@ -221,7 +153,8 @@ const ForgotPassword = () => {
                           <Select
                             options={users}
                             placeholder="Please select an user."
-                            onChange={(e) => setUserId(e._id)}
+                            // onChange={(e) => setUserId(e._id)}
+                            onChange={(e) => updateUser(e._id)}
                           />
                         </div>
                         <div class="col-md-5">
@@ -239,12 +172,46 @@ const ForgotPassword = () => {
                       <Select
                         options={subCategoryOptions}
                         placeholder="Select an option"
-                        //   value={selectedSubCategory}
                         onChange={(e) => setChallengeId(e._id)}
                       />
                     </div>
                   </div>
                 </div>
+                {userId && subCategoryOptions.length > 0 && (
+                  <div
+                    class="grid-container card "
+                    style={{ padding: 20, marginTop: 20 }}
+                  >
+                    {subCategoryOptions.map((item, index) => (
+                      <>
+                      <div
+                        class="grid-item"
+                        style={{
+                          alignItems: "center",
+                          justifyContent: "center",
+                          backgroundColor:item._id == ChallengeId && 'green'
+                        }}
+                        onClick={() =>setChallengeId(item._id)}
+                      >
+                       
+                        <div
+                          className="center"
+                          style={{ alignItems: "center", marginLeft: "35%" }}
+                        >
+                          <img
+                            src={item.userDetails[0].profilePicture}
+                            alt="logo"
+                            style={{ height: 45, width: 45, borderRadius: 50 }}
+                          />
+                        </div>
+                        <div className="competitionTitle">Competition</div>
+                        <div className="competitionTitle2">{item.name}</div>
+                        <div className="dollerValue">$ 1000</div>
+                      </div>
+                      </>
+                    ))}
+                  </div>
+                )}
                 <div style={{ marginTop: 20 }}>
                   <div className="more_info_head">More information</div>
                   <div style={{}}>

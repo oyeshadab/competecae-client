@@ -63,9 +63,7 @@ textarea
 }
 
 div.card {
-    /* width: 250px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* text-align: center; */
   }
 
 
@@ -78,4 +76,40 @@ div.card {
       height: 150px;
       width:'100%';
       object-fit: contain;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin: 1px;
+  }
+  .grid-item {
+    text-align: center;
+    height: 120px;
+    width: 80%;
+    background-color:#D19A2C;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    padding-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+  }
+
+  .competitionTitle{
+      font-weight: bold;
+  }
+  .competitionTitle2{
+      font-size: 12px;
+  }
+  .dollerValue{
+      font-size: 12px;
+      font-weight: bold;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
