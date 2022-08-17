@@ -27,23 +27,24 @@ const ForgotPassword = () => {
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    getUser();
+    // getUser();
+    getUserSearch('')
     getCompetitions("?userId=");
   }, []);
 
-  const getUser = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/users`)
-      .then((res) => {
-        var newRes = res.data.map((item, index) => {
-          item.label = item.user_name;
-          item.value = index;
-          return item;
-        });
-        setUsers(newRes);
-      })
-      .catch((err) => {});
-  };
+  // const getUser = () => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/users`)
+  //     .then((res) => {
+  //       var newRes = res.data.map((item, index) => {
+  //         item.label = item.user_name;
+  //         item.value = index;
+  //         return item;
+  //       });
+  //       setUsers(newRes);
+  //     })
+  //     .catch((err) => {});
+  // };
 
   const getUserSearch = (search) => {
     var param = 'user_name=';
@@ -137,7 +138,9 @@ const ForgotPassword = () => {
   };
 
   const updateUser = (userId) => {
-    setUserId(userId);
+  // console.log("🚀 ~ file: index.jsx ~ line 141 ~ updateUser ~ userId", userId)
+    setSearchValue(userId.user_name)
+    setUserId(userId._id);
     getCompetitions("?user=" + userId);
   };
 
@@ -211,7 +214,7 @@ const ForgotPassword = () => {
                             {showList && users.length > 0 &&
                           <ul className="list">
                               {users.map((item, index) => (
-                                <li onClick={()=>{updateUser(item._id);setShowList(false)}} className="listItem">{item.label}</li>
+                                <li onClick={()=>{updateUser(item);setShowList(false)}} className="listItem">{item.label}</li>
                               ))}
                               </ul>
                             }
