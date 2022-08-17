@@ -26,7 +26,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     getUser();
-    getCompetitions("?user=");
+    getCompetitions("?userId=");
   }, []);
 
   const getUser = () => {
@@ -94,8 +94,8 @@ const ForgotPassword = () => {
         url: `${process.env.REACT_APP_API_URL}/api/v1/reports`,
         headers: {},
         data: {
-          challengeId: userId,
-          userId: ChallengeId,
+          challengeId: ChallengeId,
+          submittedBy: userId,
           description: description,
           proof: uploadedFile.url,
         },
