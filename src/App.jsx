@@ -473,7 +473,14 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/confirm" element={<ConfirmEmail />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/report-cheaters" element={<ReportCheaters />} />
+            <Route
+              path="/report-cheaters"
+              element={
+                <RequireAuth loginPath={"/login"}>
+                  <ReportCheaters />
+                </RequireAuth>
+              }
+            />
             <Route
               path="/join/:code"
               element={
