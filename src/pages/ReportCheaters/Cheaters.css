@@ -113,3 +113,23 @@ div.card {
     margin-left: auto;
     margin-right: auto;
   }
+
+  .list{
+    /* margin:5px; */
+                padding:5px;
+                background-color: white;
+                width: 240px;
+                /* height: auto; */
+                max-height: 200px;
+                overflow: auto;
+                text-align:justify;
+                border-width: 1px;
+  }
+  .listItem{
+    cursor: pointer;
+  }
+  .btn{
+    background-color:'red';
+    height: 45px;
+    width: 30px;
+  }

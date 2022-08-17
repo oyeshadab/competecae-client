@@ -23,6 +23,8 @@ const ForgotPassword = () => {
   const [userId, setUserId] = useState("");
   const [ChallengeId, setChallengeId] = useState("");
   const [description, setDescription] = useState();
+  const [showList, setShowList] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     getUser();
@@ -32,6 +34,28 @@ const ForgotPassword = () => {
   const getUser = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users`)
+      .then((res) => {
+        var newRes = res.data.map((item, index) => {
+          item.label = item.user_name;
+          item.value = index;
+          return item;
+        });
+        setUsers(newRes);
+      })
+      .catch((err) => {});
+  };
+
+  const getUserSearch = (search) => {
+    var param = 'user_name=';
+    let result = search.includes("@")
+    if(result) param = 'email=';
+    let isnum = /^\d+$/.test(search);
+    if(isnum) param = 'phone=';
+    // console.log("🚀 ~ file: index.jsx ~ line 50 ~ getUserSearch ~ result", isnum)
+    
+    setSearchValue(search)
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/users?`+param+search)
       .then((res) => {
         var newRes = res.data.map((item, index) => {
           item.label = item.user_name;
@@ -113,7 +137,6 @@ const ForgotPassword = () => {
   };
 
   const updateUser = (userId) => {
-
     setUserId(userId);
     getCompetitions("?user=" + userId);
   };
@@ -153,18 +176,53 @@ const ForgotPassword = () => {
                     <form onSubmit={() => {}}>
                       <div class="row" style={{}}>
                         <div class="col-md-7">
-                          <Select
+                          {/* <Select
                             options={users}
                             placeholder="Please select an user."
                             // onChange={(e) => setUserId(e._id)}
                             onChange={(e) => updateUser(e._id)}
+                          /> */}
+
+                          <input
+                            // id={`id${id}`}
+                            // value={value}
+                            // type={type}
+                            // min={min}
+                            // className="bg-yellow-100 border-primary-700 border border-opacity-25 text-primary-700 placeholder:text-primary-700 placeholder:text-opacity-40 rounded-full py-2 px-5 font-semibold text-5xl w-full"
+                            placeholder={"Please select an user."}
+                            style={{
+                              borderWidth: 1,
+                              height: 37,
+                              borderRadius: 5,
+                              paddingLeft: 10,
+                              paddingRight: 10,
+                              width: 240,
+                            }}
+                            value={searchValue}
+                            // {...inputProps}
+                            onFocus={() => setShowList(true)}
+                            onChange={(e)=>{getUserSearch(e.target.value)}}
+                            // onBlur={() => setShowList(false)}
                           />
+
+                          {/* <div style={{ height: 150 }}> */}
+                          {/* //  style={{height:150,overflow:'hidden'}} */}
+                           {/* > */}
+                            {showList && users.length > 0 &&
+                          <ul className="list">
+                              {users.map((item, index) => (
+                                <li onClick={()=>{updateUser(item._id);setShowList(false)}} className="listItem">{item.label}</li>
+                              ))}
+                              </ul>
+                            }
+                          {/* </div> */}
                         </div>
                         <div class="col-md-5">
                           <Button
                             text="Search"
                             type="primary"
                             style={{ marginLeft: 10 }}
+                            // fn={() => {submit()}}
                           />
                         </div>
                       </div>
@@ -187,30 +245,33 @@ const ForgotPassword = () => {
                   >
                     {subCategoryOptions.map((item, index) => (
                       <>
-                      <div
-                        class="grid-item"
-                        style={{
-                          alignItems: "center",
-                          justifyContent: "center",
-                          backgroundColor:item._id == ChallengeId && 'green'
-                        }}
-                        onClick={() =>setChallengeId(item._id)}
-                      >
-                       
                         <div
-                          className="center"
-                          style={{ alignItems: "center", marginLeft: "35%" }}
+                          class="grid-item"
+                          style={{
+                            alignItems: "center",
+                            justifyContent: "center",
+                            backgroundColor: item._id == ChallengeId && "green",
+                          }}
+                          onClick={() => setChallengeId(item._id)}
                         >
-                          <img
-                            src={item.userDetails[0].profilePicture}
-                            alt="logo"
-                            style={{ height: 45, width: 45, borderRadius: 50 }}
-                          />
+                          <div
+                            className="center"
+                            style={{ alignItems: "center", marginLeft: "35%" }}
+                          >
+                            <img
+                              src={item.userDetails[0].profilePicture}
+                              alt="logo"
+                              style={{
+                                height: 45,
+                                width: 45,
+                                borderRadius: 50,
+                              }}
+                            />
+                          </div>
+                          <div className="competitionTitle">Competition</div>
+                          <div className="competitionTitle2">{item.name}</div>
+                          <div className="dollerValue">$ 1000</div>
                         </div>
-                        <div className="competitionTitle">Competition</div>
-                        <div className="competitionTitle2">{item.name}</div>
-                        <div className="dollerValue">$ 1000</div>
-                      </div>
                       </>
                     ))}
                   </div>
