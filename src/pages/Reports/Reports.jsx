@@ -3,7 +3,7 @@ import PageContent from "../../components/PageContent/PageContent";
 // import Sidebar from "../../components/Sidebar/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
+import { useEffect,useState } from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
 import Badge from "../../components/Badge/Badge";
@@ -24,6 +24,7 @@ const Reports = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const authUser = useAuthUser();
   const navigate = useNavigate();
+ 
 
   let statusOptions = [
     { value: "pending", label: "Pending" },
@@ -111,6 +112,7 @@ useEffect(() => {
     setUserId("");
     setChallengeId("");
     setSelectedStatus("");
+    window.location.reload();
   }
 
   return (
@@ -131,7 +133,8 @@ useEffect(() => {
                 <Select
                   options={users}
                   placeholder="Please select an user."
-                  onChange={(e) => setUserId(e._id)}
+                  onChange={(e) =>setUserId(e._id)}
+
                 />
               </div>
               <div class="col-md-3">

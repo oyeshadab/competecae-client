@@ -103,6 +103,7 @@ const ForgotPassword = () => {
         },
       }).then((response) => {
         alert("Report submitted.");
+        window.location.reload();
       });
     }
   };
