@@ -33,7 +33,7 @@ export default function MyVerticallyCenteredModal({
         status: reportStatus,
       })
       .then((res) => {
-        console.log("Status updated successfully");
+        handleClose();
       })
       .catch((err) => {
         console.error(err);
@@ -93,6 +93,7 @@ export default function MyVerticallyCenteredModal({
           >
             <option value="approved">approved</option>
             <option value="rejected">rejected</option>
+            <option value="pending">pending</option>
           </Form.Select>
         </div>
         <h4>
