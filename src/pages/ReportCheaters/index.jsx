@@ -83,19 +83,21 @@ const ForgotPassword = () => {
     setUserId(e._id);
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (!userId) {
       alert("Please select an user.");
     } else if (!ChallengeId) {
       alert("Please select a challenge.");
     } else {
+      const userData = await JSON.parse(localStorage.getItem("_auth_state"));
       axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/api/v1/reports`,
         headers: {},
         data: {
           challengeId: ChallengeId,
-          submittedBy: userId,
+          userId: userId,
+          submittedBy: userData.user_id,
           description: description,
           proof: uploadedFile.url,
         },
