@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
-// import "bootstrap/dist/css/bootstrap.min.css";
+
 
 export default function MyVerticallyCenteredModal({
   show,
@@ -62,13 +61,19 @@ export default function MyVerticallyCenteredModal({
         }}
       >
         <h4 style={{ padding: "10px" }}>
-          challenge name:{" "}
+          Challenge name:
           <span style={{ marginLeft: "10px" }}>
             {report?.challengeId?.name || "N/A"}
-          </span>{" "}
+          </span>
         </h4>
         <h4 style={{ padding: "10px" }}>
-          Description:{" "}
+          User name:
+          <span style={{ marginLeft: "10px" }}>
+            {report?.userId?.user_name || "N/A"}
+          </span>
+        </h4>
+        <h4 style={{ padding: "10px" }}>
+          Description:
           <span style={{ marginLeft: "10px" }}>{report?.description}</span>
         </h4>
         <div
@@ -80,15 +85,20 @@ export default function MyVerticallyCenteredModal({
           }}
         >
           <h4>Status:</h4>
-          <Form.Select style={{ marginLeft: "10px" }}  value={reportStatus} onChange={(e)=>setReportStatus(e.target.value)} size="lg">
+          <Form.Select
+            style={{ marginLeft: "10px" }}
+            value={reportStatus}
+            onChange={(e) => setReportStatus(e.target.value)}
+            size="lg"
+          >
             <option value="approved">approved</option>
             <option value="rejected">rejected</option>
           </Form.Select>
         </div>
         <h4>
-          Reported By:{" "}
+          Reported By:
           <span style={{ marginLeft: "10px" }}>
-            {report?.userId?.user_name || "N/A"}
+            {report?.submittedBy?.user_name || "N/A"}
           </span>
         </h4>
         <div
@@ -100,26 +110,33 @@ export default function MyVerticallyCenteredModal({
           }}
         >
           <h4>Proof:</h4>
-          <Image
-            thumbnail
-            style={{ height: "70px", width: "70px", marginLeft: "30px" }}
-            src={report?.proof}
-            alt="Proof"
-          />
+          {report?.proof ? (
+            <Image
+              thumbnail
+              style={{ height: "70px", width: "70px", marginLeft: "30px" }}
+              src={report?.proof}
+              alt="Proof"
+            />
+          ) : (
+            "N/A"
+          )}
         </div>
         <h4 style={{ padding: "10px" }}>
           Created At:{" "}
           <span style={{ marginLeft: "10px" }}>{report?.createdAt}</span>{" "}
         </h4>
       </Modal.Body>
-      <Modal.Footer>
-      <Button color="primary" onClick={handleStatusChange}>
-            Update Status
-      </Button>
+      <Modal.Footer className="p-10">
+        <button
+          className="btn btn-outline-primary p-2"
+          onClick={handleStatusChange}
+        >
+          Update Status
+        </button>
 
-        <Button color="primary" onClick={handleClose}>
+        <button className="btn btn-outline-primary p-2" onClick={handleClose}>
           Close
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );

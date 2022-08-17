@@ -55,9 +55,6 @@ const Reports = () => {
     axios
       .get(
         `${process.env.REACT_APP_API_URL}/users`
-        // , {
-        //   verification_code: e.target.code.value,
-        // }
       )
       .then((res) => {
         var newRes = res.data.map((item, index) => {
@@ -118,7 +115,6 @@ useEffect(() => {
 
   return (
     <section className="admin-page">
-      {/* <Sidebar /> */}
       <PageContent>
         <div className="admin-page__intro">
           <button
