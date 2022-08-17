@@ -168,13 +168,13 @@ const ForgotPassword = () => {
                     </form>
                   </div>
                   <div class="col-md-6">
-                    <div style={{ width: 200, right: 30 }}>
+                    {/* <div style={{ width: 200, right: 30 }}>
                       <Select
                         options={subCategoryOptions}
                         placeholder="Select an option"
                         onChange={(e) => setChallengeId(e._id)}
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 {userId && subCategoryOptions.length > 0 && (
