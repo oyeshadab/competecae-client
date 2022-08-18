@@ -19,41 +19,50 @@ const Register = () => {
   const submitRegister = (e) => {
     e.preventDefault();
 
-    if (e.target.password.value !== e.target.cpassword.value) {
-      toast.warn("Passwords do not match!");
-    } else {
-      axios
-        .post(`${process.env.REACT_APP_API_URL}/users`, {
-          user_name: e.target.username.value,
-          password: e.target.password.value,
-          email: e.target.email.value,
-          phone: e.target.phone.value,
-        })
-        .then((res) => {
-          return axios.post(`${process.env.REACT_APP_API_URL}/notify/email`, {
-            email: e.target.email.value,
-            subject: "Complete Your Registration!",
-            text: `Use code ${res.data.verification_code} to confirm your registration.`,
-            html: `Use code ${res.data.verification_code} to confirm your registration.`,
-          });
-        })
-        .then(() => {
-          navigate("/confirm");
-        })
-        .catch((err) => {
-          console.log(err);
-          switch (err.response.status) {
-            case 403:
-              toast.error("An account is already registered using that email!");
-              break;
-            case 406:
-              toast.error("That username is already taken!");
-              break;
-            default:
-              break;
-          }
-        });
+
+    var nameRegex = /^[a-zA-Z\-]+$/;
+    e.target.username.value.match(nameRegex)
+    if(!e.target.username.value.match(nameRegex)){
+      toast.error("Invalid user name.");
     }
+    else{
+      if (e.target.password.value !== e.target.cpassword.value) {
+        toast.warn("Passwords do not match!");
+      } else {
+        axios
+          .post(`${process.env.REACT_APP_API_URL}/users`, {
+            user_name: e.target.username.value,
+            password: e.target.password.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+          })
+          .then((res) => {
+            return axios.post(`${process.env.REACT_APP_API_URL}/notify/email`, {
+              email: e.target.email.value,
+              subject: "Complete Your Registration!",
+              text: `Use code ${res.data.verification_code} to confirm your registration.`,
+              html: `Use code ${res.data.verification_code} to confirm your registration.`,
+            });
+          })
+          .then(() => {
+            navigate("/confirm");
+          })
+          .catch((err) => {
+            console.log(err);
+            switch (err.response.status) {
+              case 403:
+                toast.error("An account is already registered using that email!");
+                break;
+              case 406:
+                toast.error("That username is already taken!");
+                break;
+              default:
+                break;
+            }
+          });
+      }
+    }
+
   };
 
   return (
