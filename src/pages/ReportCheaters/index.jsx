@@ -25,7 +25,7 @@ const ForgotPassword = () => {
   const [description, setDescription] = useState();
   const [showList, setShowList] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-
+  const [paramValue, setparamValue] = useState('');
   useEffect(() => {
     // getUser();
     getUserSearch('')
@@ -49,9 +49,15 @@ const ForgotPassword = () => {
   const getUserSearch = (search) => {
     var param = 'user_name=';
     let result = search.includes("@")
-    if(result) param = 'email=';
+    if(result) {
+      param = 'email='; 
+      setparamValue('email')
+    }
     let isnum = /^\d+$/.test(search);
-    if(isnum) param = 'phone=';
+    if(isnum) {
+    param = 'phone=';
+    setparamValue('phone')
+    }
     // console.log("🚀 ~ file: index.jsx ~ line 50 ~ getUserSearch ~ result", isnum)
     
     setSearchValue(search)
@@ -59,7 +65,7 @@ const ForgotPassword = () => {
       .get(`${process.env.REACT_APP_API_URL}/users?`+param+search)
       .then((res) => {
         var newRes = res.data.map((item, index) => {
-          item.label = item.user_name;
+          item.label = item.user_name +paramValue? '-' + item[paramValue] :'';
           item.value = index;
           return item;
         });
