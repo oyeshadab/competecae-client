@@ -65,7 +65,7 @@ const ForgotPassword = () => {
       .get(`${process.env.REACT_APP_API_URL}/users?`+param+search)
       .then((res) => {
         var newRes = res.data.map((item, index) => {
-          item.label = item.user_name +paramValue? '-' + item[paramValue] :'';
+          item.label = `${item.user_name} ${paramValue? "- " + item[paramValue] : ''}`
           item.value = index;
           return item;
         });
