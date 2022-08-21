@@ -65,7 +65,7 @@ const ForgotPassword = () => {
       .get(`${process.env.REACT_APP_API_URL}/users?`+param+search)
       .then((res) => {
         var newRes = res.data.map((item, index) => {
-          item.label = `${item.user_name} ${paramValue? "- " + item[paramValue] : ''}`
+          item.label = `${item.user_name} ${paramValue? item[paramValue] ==search ? item[paramValue] : '' :''}`
           item.value = index;
           return item;
         });
@@ -156,9 +156,11 @@ const ForgotPassword = () => {
     <>
       <div className="container">
         <div className="" style={{ marginBottom: 20 }}>
-          <div class="container">
+          {/* <div class="container"> */}
+           
             <div class="row" style={{ marginTop: 20 }}>
-              <div class="col-md-3" style={{ marginLeft: 50 }}>
+             
+              <div class="col-md-3" >
                 <div className="report_head">Report Cheaters</div>
                 <div className="report_details_text">
                   Lorem Ipsum is simply dummy text of the printing and
@@ -177,8 +179,8 @@ const ForgotPassword = () => {
                 </div>
               </div>
               <div
-                class="col-md-8"
-                style={{ alignItems: "center", marginLeft: 10 }}
+                class="col-md-8 mx-auto"
+                style={{ alignItems: "center"}}
               >
                 <div class="row">
                   <div class="col-md-6">
@@ -389,6 +391,7 @@ const ForgotPassword = () => {
                 </div>
               </div>
             </div>
+
             <div
               className="submit-btn"
               style={{
@@ -404,7 +407,8 @@ const ForgotPassword = () => {
                 fn={() => submit()}
               />
             </div>
-          </div>
+
+          {/* </div> */}
         </div>
       </div>
       <ToastContainer />
