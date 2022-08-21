@@ -155,7 +155,7 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="container">
-        <div className="card" style={{ marginBottom: 20 }}>
+        <div className="" style={{ marginBottom: 20 }}>
           <div class="container">
             <div class="row" style={{ marginTop: 20 }}>
               <div class="col-md-3" style={{ marginLeft: 50 }}>
@@ -226,11 +226,12 @@ const ForgotPassword = () => {
                             }
                           {/* </div> */}
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 nbtn">
                           <Button
                             text="Search"
                             type="primary"
-                            style={{ marginLeft: 10 }}
+                            // style={{ marginTop: 10 }}
+                            className="btn-primary"
                             // fn={() => {submit()}}
                           />
                         </div>
@@ -247,14 +248,59 @@ const ForgotPassword = () => {
                     </div> */}
                   </div>
                 </div>
+
+
+                
+
+
+
+                {/* <div
+                  class="grid-container card "
+                  style={{ padding: 20, marginTop: 20 }}
+                > */}
                 {userId && subCategoryOptions.length > 0 && (
-                  <div
-                    class="grid-container card "
-                    style={{ padding: 20, marginTop: 20 }}
-                  >
+                    <div class="cards">
                     {subCategoryOptions.map((item, index) => (
                       <>
+                        <div class=" grid-item"
+                        style={{
+                          alignItems: "center",
+                          justifyContent: "center",
+                          backgroundColor: item._id == ChallengeId && "green",
+                        }}
+                        onClick={() => setChallengeId(item._id)}
+                        >
                         <div
+                            className="center"
+                            style={{ alignItems: "center", marginLeft: "35%" }}
+                          >
+                            <img
+                              src={item.userDetails[0].profilePicture}
+                              alt="logo"
+                              style={{
+                                height: 45,
+                                width: 45,
+                                borderRadius: 50,
+                              }}
+                            />
+                          </div>
+                          <div className="competitionTitle">Competition</div>
+                          <div className="competitionTitle2">{item.name}</div>
+                          <div className="dollerValue">$ 1000</div>
+                        </div>
+                        {/* <div class="card1">TWO</div>
+                        <div class="card1">THREE</div>
+                        <div class="card1">FOUR</div>
+                        <div class="card1">FIVE</div>
+                        <div class="card1">SIX</div>
+                        <div class="card1">SEVEN</div>
+                        <div class="card1">EIGHT</div>
+                        <div class="card1">NINE</div>
+                        <div class="card1">TEN</div>
+                        <div class="card1">ELEVEN</div>
+                        <div class="card1">TWELVE</div> */}
+                      
+                        {/* <div
                           class="grid-item"
                           style={{
                             alignItems: "center",
@@ -280,11 +326,12 @@ const ForgotPassword = () => {
                           <div className="competitionTitle">Competition</div>
                           <div className="competitionTitle2">{item.name}</div>
                           <div className="dollerValue">$ 1000</div>
-                        </div>
+                        </div> */}
                       </>
                     ))}
-                  </div>
+                    </div> 
                 )}
+                {/* </div> */}
                 <div style={{ marginTop: 20 }}>
                   <div className="more_info_head">More information</div>
                   <div style={{}}>
@@ -343,10 +390,11 @@ const ForgotPassword = () => {
               </div>
             </div>
             <div
+              className="submit-btn"
               style={{
                 textAlign: "right",
                 paddingBottom: 50,
-                paddingRight: 50,
+                // paddingRight: 50,
               }}
             >
               <Button

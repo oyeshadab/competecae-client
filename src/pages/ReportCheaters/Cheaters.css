@@ -45,9 +45,16 @@ textarea
 }
 
 .alignText{
-    position: absolute;
+  padding: 50px 0;
+  /* border: 3px solid green; */
+  text-align: center;
+  /* display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%; */
+    /* position: absolute;
     left: 40%;
-    top: 40%;
+    top: 40%; */
 }
 
 .drag_drop_title{
@@ -80,7 +87,7 @@ div.card {
 
   .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    /* grid-template-columns: auto auto auto auto; */
     margin: 1px;
   }
   .grid-item {
@@ -133,3 +140,40 @@ div.card {
     height: 45px;
     width: 30px;
   }
+
+
+
+
+
+.card1 {
+  background-color: #D19A2C;
+  color: white;
+  /* padding: 1rem; */
+  height: 15rem;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+  margin-top: 20px;
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  /* .nbtn{margin-top: 10rem;} */
+}
+
+@media (max-width: 400px) {
+  /* .cards { grid-template-columns: repeat(2, 1fr); } */
+  .nbtn{margin-top: 10px;}
+  /* .submit-btn{margin-left: 0px;} */
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  /* .nbtn{margin-top: 10rem;} */
+}
