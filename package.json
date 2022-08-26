@@ -40,6 +40,7 @@
     "react-iframe": "^1.8.0",
     "react-images-uploading": "^3.1.6",
     "react-loader-spinner": "^5.1.7-beta.1",
+    "react-loading-screen": "^0.0.17",
     "react-modal": "^3.14.4",
     "react-modern-drawer": "^1.1.2",
     "react-multi-carousel": "^2.8.2",

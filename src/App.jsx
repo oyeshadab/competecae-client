@@ -26,6 +26,7 @@ import Carousel from "./components/caraousel-react/carousel-books";
 import Navbar from "./components/global/navbar/Navbar.tsx";
 import Dashboard from "./pages/Dashboard/Dashboard.tsx";
 import Reports from "./pages/Reports/Reports";
+import HandleAuth from "./pages/handleAuth/HandleAuth";
 // import "./style/main.css";
 
 function App() {
@@ -469,6 +470,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="*" element={<NotFound />} />
+            <Route path="/handleAuth" element={<HandleAuth />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/confirm" element={<ConfirmEmail />} />
