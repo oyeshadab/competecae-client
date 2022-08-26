@@ -10,6 +10,7 @@ const HandleAuth = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("_auth_state") || "{}");
+ 
   const code = searchParams.get("code");
   useEffect(() => {
     axios

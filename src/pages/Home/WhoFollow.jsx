@@ -10,6 +10,7 @@ const WhoFollow = ({ data }) => {
 	const [Follow, setFollow] = useState(null);
 	const [expanded, setExpanded] = useState(false);
 	const [DataForDisplay, setDataForDisplay] = useState([]);
+	const [withings, setwithings] = useState(false);
 
 	useEffect(() => {
 		axios
@@ -50,30 +51,27 @@ const WhoFollow = ({ data }) => {
 			.catch((err) => console.error(err));
 	};
 
+	useEffect(() => {
+		axios.get(`${process.env.REACT_APP_API_URL}/users/${authUser().user_id}`).then((res)=>{
+			if(res.data.withings._id){
+				setwithings(true)
+			}
+			})
+	},[]);
+
+
    const ConnectWithWithing = () => {
-      // alert(process.env.REACT_APP_API_URL)
-      // return
-      axios
-			.post(`${process.env.REACT_APP_API_URL}/Withings/connect`, {
-				user_id: authUser().user_id,
-			})
-			.then((res) => {
-				console.log("🚀 ~ file: WhoFollow.jsx ~ line 61 ~ .then ~ res", res)
-				// getFollow();
-				// toast.success(`Successfully followed ${follow}`);
-			})
-			.catch((err) => console.error(err));
-      console.log("🚀 ~ file: WhoFollow.jsx ~ line 66 ~ ConnectWithWithing ~ process.env.REACT_APP_API_URL}/Withings/connect", process.env.REACT_APP_API_URL+'/Withings/connect')
-      alert(authUser().user_id)
+	window.location.href = `${process.env.REACT_APP_API_URL}/users/getWithingsCode?userId=${authUser().user_id}`
    };
 
 	return (
 		<>
 		<div className="bg-yellow-700 rounded-lg p-5">
-			<h6 className="font-poppins text-small text-22xl mb-3" style={{textAlign: 'center'}}>Connect to Withings</h6>
+			<h6 className="font-poppins text-small text-22xl mb-3" style={{textAlign: 'center'}}>Connection with Withings</h6>
 			<div>
 				<Button
-					text="Connect"
+					text={ withings ? "Connected": "Connect Now"}
+					disabled={withings ? true : false}
 					type="secondary"
 					style={{ alignSelf: 'center',width: '100%'}}
 					className="btn-primary"
