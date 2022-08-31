@@ -14,6 +14,7 @@ const WhoFollow = ({ data }) => {
   const [withings, setwithings] = useState(false);
   const [plaidToken, setPlaidToken] = useState("");
   const [accounts, setAccounts] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => {
     axios
@@ -58,6 +59,8 @@ const WhoFollow = ({ data }) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users/${authUser().user_id}`)
       .then((res) => {
+        setAccounts(res.data?.accountBalances?.accounts);
+		setLastUpdated(res.data?.accountBalances?.lastUpdated)
         if (res.data?.withings?._id) {
           setwithings(true);
         }
@@ -132,10 +135,18 @@ const WhoFollow = ({ data }) => {
         >
           Plaid Account
         </h1>
-        <div className="flex gap-4 justify-between items-center mb-3">
-          <h1 className="p-8">Name</h1>
-          <h1 className="p-8">Current Balance </h1>
-        </div>
+		{accounts.length > 0 && (
+          <div className="flex gap-4 justify-between items-center mb-3">
+            <h1>Last Updated Time </h1>
+            <h1>{lastUpdated}</h1>
+          </div>
+        )}
+        {accounts.length > 0 && (
+          <div className="flex gap-4 justify-between items-center mb-3">
+            <h6 className="p-8">Name</h6>
+            <h6 className="p-8">Current Balance </h6>
+          </div>
+        )}
         <div>
           {accounts.length > 0 ? (
             accounts.map((account, index) => (
