@@ -49,62 +49,62 @@ const Home = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/posts`)
       .then((res) => {
-        setPosts(res.data);
-        setDataForDisplay(res.data.slice(0, 5));
+        setPosts(res?.data);
+        setDataForDisplay(res?.data?.slice(0, 5));
       })
       .catch((err) => console.log(err));
   };
 
-  const getFollow = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/posts`)
-      .then((res) => setPosts(res.data))
-      .catch((err) => console.log(err));
-  };
+  // const getFollow = () => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/posts`)
+  //     .then((res) => setPosts(res.data))
+  //     .catch((err) => console.log(err));
+  // };
 
-  const makePost = () => {
-    if (newPostText !== "") {
-      if (postImage.length > 0) {
-        let formData = new FormData();
-        formData.append("image", postImage[0].file);
+  // const makePost = () => {
+  //   if (newPostText !== "") {
+  //     if (postImage.length > 0) {
+  //       let formData = new FormData();
+  //       formData.append("image", postImage[0].file);
 
-        axios
-          .post(`${process.env.REACT_APP_API_URL}/upload`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((res) => {
-            return axios.post(`${process.env.REACT_APP_API_URL}/posts`, {
-              user: authUser().user_id,
-              text: newPostText,
-              image: res.data.url,
-            });
-          })
-          .then(() => {
-            getPosts();
-            setNewPostText("");
-            setPostImage([]);
-            toast.success("New post! Make sure to share with your friends.");
-          })
-          .catch((err) => console.log(err));
-      } else {
-        axios
-          .post(`${process.env.REACT_APP_API_URL}/posts`, {
-            user: authUser().user_id,
-            text: newPostText,
-          })
-          .then(() => {
-            getPosts();
-            setNewPostText("");
-            toast.success("New post! Make sure to share with your friends.");
-          })
-          .catch((err) => console.log(err));
-      }
-    } else {
-      toast.warn("Post can't be empty!");
-    }
-  };
+  //       axios
+  //         .post(`${process.env.REACT_APP_API_URL}/upload`, formData, {
+  //           headers: {
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         })
+  //         .then((res) => {
+  //           return axios.post(`${process.env.REACT_APP_API_URL}/posts`, {
+  //             user: authUser().user_id,
+  //             text: newPostText,
+  //             image: res.data.url,
+  //           });
+  //         })
+  //         .then(() => {
+  //           getPosts();
+  //           setNewPostText("");
+  //           setPostImage([]);
+  //           toast.success("New post! Make sure to share with your friends.");
+  //         })
+  //         .catch((err) => console.log(err));
+  //     } else {
+  //       axios
+  //         .post(`${process.env.REACT_APP_API_URL}/posts`, {
+  //           user: authUser().user_id,
+  //           text: newPostText,
+  //         })
+  //         .then(() => {
+  //           getPosts();
+  //           setNewPostText("");
+  //           toast.success("New post! Make sure to share with your friends.");
+  //         })
+  //         .catch((err) => console.log(err));
+  //     }
+  //   } else {
+  //     toast.warn("Post can't be empty!");
+  //   }
+  // };
 
   return (
     <div>
@@ -121,7 +121,7 @@ const Home = () => {
             <CreatePost getHomePosts={getPosts} />
             <div className="flex flex-col gap-5 mb-3">
               {DataForDisplay
-                ? DataForDisplay.map((post) => {
+                ? DataForDisplay?.map((post) => {
                     return (
                       <Article
                         getHomePosts={getPosts}

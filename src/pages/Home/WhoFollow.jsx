@@ -79,6 +79,19 @@ const WhoFollow = ({ data }) => {
 				/>
 			</div>
 		</div>
+		<div className="bg-yellow-700 rounded-lg p-5">
+			<h6 className="font-poppins text-small text-22xl mb-3" style={{textAlign: 'center'}}>Plaid Account</h6>
+			<div>
+				<Button
+					text="Connect Now"
+					// disabled={withings ? true : false}
+					type="secondary"
+					style={{ alignSelf: 'center',width: '100%'}}
+					className="btn-primary"
+					// fn={() => {ConnectWithWithing()}}
+				/>
+			</div>
+		</div>
 
 
 		<div className="bg-yellow-700 rounded-lg p-5">

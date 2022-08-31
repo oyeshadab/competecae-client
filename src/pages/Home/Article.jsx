@@ -1,23 +1,13 @@
 import React from "react";
 // @ts-ignore
 import UserInfo from "../../components/common/UserInfo.tsx";
-// @ts-ignore
-import Card1 from "./Card.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartBlank } from "@fortawesome/free-regular-svg-icons";
-import {
-  faHeart,
-  faShare,
-  faEllipsis,
-} from "@fortawesome/free-solid-svg-icons";
-import { useAuthUser } from "react-auth-kit";
-import { v4 as uuidv4 } from "uuid";
-import { toast } from "react-toastify";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
-import Form from "react-bootstrap/Form";
 import Input from "../../components/Input/Input";
 
 const Article = ({ getHomePosts, data, users, toast, getPosts, authUser }) => {
@@ -73,7 +63,7 @@ const Article = ({ getHomePosts, data, users, toast, getPosts, authUser }) => {
   };
 
   const setModal = (data, enable) => {
-    console.log("data", data);
+    // console.log("data", data);
     setCurrentPost(data);
     setModalOpen(true);
   };
@@ -116,12 +106,15 @@ const Article = ({ getHomePosts, data, users, toast, getPosts, authUser }) => {
                 ? users.find((user) => user._id === data.user).user_name
                 : ""
             }
-            active={new Date(data.date)
-              .toISOString()
-              .replace(/T.*/, "")
-              .split("-")
-              .reverse()
-              .join("-")}
+            active={
+              data.date &&
+              new Date(data?.date)
+                .toISOString()
+                .replace(/T.*/, "")
+                .split("-")
+                .reverse()
+                .join("-")
+            }
           />
         </div>
         <div className="grid md:grid-cols-2 gap-5 mb-4">
@@ -200,7 +193,7 @@ const Article = ({ getHomePosts, data, users, toast, getPosts, authUser }) => {
               src="/images/icons8-topic-50 3.png"
               alt=""
             />
-            <span className="font-medium text-7xl">{data.comments.length}</span>
+            <span className="font-medium text-7xl">{data?.comments?.length}</span>
           </button>
           <button type="button" className="flex gap-1 items-center">
             <img
