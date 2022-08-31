@@ -60,7 +60,7 @@ const WhoFollow = ({ data }) => {
       .get(`${process.env.REACT_APP_API_URL}/users/${authUser().user_id}`)
       .then((res) => {
         setAccounts(res.data?.accountBalances?.accounts);
-		setLastUpdated(res.data?.accountBalances?.lastUpdated)
+        setLastUpdated(res.data?.accountBalances?.lastUpdated);
         if (res.data?.withings?._id) {
           setwithings(true);
         }
@@ -129,16 +129,27 @@ const WhoFollow = ({ data }) => {
         </div>
       </div>
       <div className="bg-yellow-700 rounded-lg p-5">
+        <div className="flex justify-end  items-center mb-3">
+          <button
+            type="button"
+            className="text-lg font-medium py-1.5 px-6 bg-primary-700 text-white whitespace-nowrap rounded-md"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Update now
+          </button>
+        </div>
         <h1
           className="font-poppins text-22xl mb-3"
           style={{ textAlign: "center" }}
         >
           Plaid Account
         </h1>
-		{accounts.length > 0 && (
+        {accounts.length > 0 && (
           <div className="flex gap-4 justify-between items-center mb-3">
             <h1>Last Updated Time </h1>
-            <h1>{lastUpdated}</h1>
+            <h1>{new Date(lastUpdated).toLocaleDateString()}</h1>
           </div>
         )}
         {accounts.length > 0 && (
