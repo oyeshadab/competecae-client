@@ -53,7 +53,7 @@ const WhoFollow = ({ data }) => {
 
 	useEffect(() => {
 		axios.get(`${process.env.REACT_APP_API_URL}/users/${authUser().user_id}`).then((res)=>{
-			if(res.data.withings._id){
+			if(res.data?.withings?._id){
 				setwithings(true)
 			}
 			})
