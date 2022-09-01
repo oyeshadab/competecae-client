@@ -134,7 +134,7 @@ const WhoFollow = ({ data }) => {
             type="button"
             className="text-lg font-medium py-1.5 px-6 bg-primary-700 text-white whitespace-nowrap rounded-md"
             onClick={() => {
-              window.location.reload();
+              open();
             }}
           >
             Update now
@@ -149,7 +149,7 @@ const WhoFollow = ({ data }) => {
         {accounts.length > 0 && (
           <div className="flex gap-4 justify-between items-center mb-3">
             <h1>Last Updated Time </h1>
-            <h1>{new Date(lastUpdated).toLocaleDateString()}</h1>
+            <h1>{new Date(lastUpdated).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}</h1>
           </div>
         )}
         {accounts.length > 0 && (
