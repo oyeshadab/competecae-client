@@ -27,6 +27,7 @@ import Navbar from "./components/global/navbar/Navbar.tsx";
 import Dashboard from "./pages/Dashboard/Dashboard.tsx";
 import Reports from "./pages/Reports/Reports";
 import HandleAuth from "./pages/handleAuth/HandleAuth";
+import HandleGarminAuth from "./pages/handleAuth/HandleGarminAuth";
 // import "./style/main.css";
 
 function App() {
@@ -471,6 +472,7 @@ function App() {
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/handleAuth" element={<HandleAuth />} />
+            <Route path="/garmin/handleAuth" element={<HandleGarminAuth/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/confirm" element={<ConfirmEmail />} />

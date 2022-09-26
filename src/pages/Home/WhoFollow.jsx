@@ -12,6 +12,7 @@ const WhoFollow = ({ data }) => {
   const [expanded, setExpanded] = useState(false);
   const [DataForDisplay, setDataForDisplay] = useState([]);
   const [withings, setwithings] = useState(false);
+  const [garmin, setGarmin] = useState(false);
   const [plaidToken, setPlaidToken] = useState("");
   const [accounts, setAccounts] = useState([]);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -61,6 +62,9 @@ const WhoFollow = ({ data }) => {
       .then((res) => {
         setAccounts(res.data?.accountBalances?.accounts);
         setLastUpdated(res.data?.accountBalances?.lastUpdated);
+        if(res.data?.garmin?._id){
+          setGarmin(true);
+        }
         if (res.data?.withings?._id) {
           setwithings(true);
         }
@@ -71,6 +75,11 @@ const WhoFollow = ({ data }) => {
     window.location.href = `${
       process.env.REACT_APP_API_URL
     }/users/getWithingsCode?userId=${authUser().user_id}`;
+  };
+  const ConnectWithGarmin = () => {
+    window.location.href = `${
+      process.env.REACT_APP_API_URL
+    }/users//oauth/garmin?userId=${authUser().user_id}`;
   };
 
   useEffect(() => {
@@ -124,6 +133,26 @@ const WhoFollow = ({ data }) => {
             className="btn-primary"
             fn={() => {
               ConnectWithWithing();
+            }}
+          />
+        </div>
+      </div>
+      <div className="bg-yellow-700 rounded-lg p-5">
+        <h6
+          className="font-poppins text-small text-22xl mb-3"
+          style={{ textAlign: "center" }}
+        >
+          Connection with Garmin
+        </h6>
+        <div>
+          <Button
+            text={garmin ? "Connected" : "Connect Now"}
+            disabled={garmin ? true : false}
+            type="secondary"
+            style={{ alignSelf: "center", width: "100%" }}
+            className="btn-primary"
+            fn={() => {
+              ConnectWithGarmin();
             }}
           />
         </div>
